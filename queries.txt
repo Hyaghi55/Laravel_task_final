@@ -1,0 +1,27 @@
+-- Page views with authorization, grouped by days
+SELECT DATE(created_at) AS date, COUNT(*) AS page_views
+FROM page_view_logs
+WHERE user_id IS NOT NULL
+GROUP BY date
+ORDER BY date;
+
+-- Page views without authorization, grouped by days
+SELECT DATE(created_at) AS date, COUNT(*) AS page_views
+FROM page_view_logs
+WHERE user_id IS NULL
+GROUP BY date
+ORDER BY date;
+
+-- Page views with authorization, grouped by months
+SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) AS page_views
+FROM page_view_logs
+WHERE user_id IS NOT NULL
+GROUP BY month
+ORDER BY month;
+
+-- Page views without authorization, grouped by months
+SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) AS page_views
+FROM page_view_logs
+WHERE user_id IS NULL
+GROUP BY month
+ORDER BY month;
